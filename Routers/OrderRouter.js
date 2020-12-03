@@ -1,20 +1,27 @@
 const express = require('express');
 const {
     addOrderedFoodItem,
-    getUserOrderedFoodItem,
+    // getUserOrderedFoodItem,
+    updateOrderedFoodItemStatus,
+    getAllOrderedFoodItem,
+    getAllOrderedPriviesFoodItem,
     getCurrentOrderedFoodItem,
-    getAllOrderedFoodItem
+    getPriviesOrderedFoodItem
 } = require('../Controllers/OrderControllers');
 
 const orderedFoodItemRouter = express.Router();
 orderedFoodItemRouter.post('/add', addOrderedFoodItem);
 
-// orderedFoodItemRouter.get('/current', getCurrentOrderedStatus);
+// orderedFoodItemRouter.post('/all', getUserOrderedFoodItem);
 
-orderedFoodItemRouter.post('/all', getUserOrderedFoodItem);
+orderedFoodItemRouter.patch('/:id/:activeStep', updateOrderedFoodItemStatus);
 
 orderedFoodItemRouter.get('/all', getAllOrderedFoodItem);
 
-orderedFoodItemRouter.get('/:id', getCurrentOrderedFoodItem);
+orderedFoodItemRouter.get('/privies/all', getAllOrderedPriviesFoodItem);
+
+orderedFoodItemRouter.get('/current/:userEmail', getCurrentOrderedFoodItem);
+
+orderedFoodItemRouter.get('/privies/:userEmail', getPriviesOrderedFoodItem);
 
 module.exports = orderedFoodItemRouter;
